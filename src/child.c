@@ -136,8 +136,8 @@ void child_process(FILE *log_fp, struct config *_config) {
         CHILD_ERROR_EXIT(SETUID_FAILED);
     }
 
-    // load seccomp
-    if (_config->seccomp_rule_name != NULL) {
+    // load seccomp 
+    if (_config->seccomp_rule_name != NULL && strcmp("none", _config->seccomp_rule_name) != 0) {
         if (strcmp("c_cpp", _config->seccomp_rule_name) == 0) {
             if (c_cpp_seccomp_rules(_config) != SUCCESS) {
                 CHILD_ERROR_EXIT(LOAD_SECCOMP_FAILED);
